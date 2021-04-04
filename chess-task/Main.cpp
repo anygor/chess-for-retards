@@ -4,13 +4,17 @@
 
 int main() {
     Figure king(5, 5, KING, WHITE);
-    Figure rook(4, 4, ROOK, BLACK);
+    Figure rook(7, 3, ROOK, BLACK);
     Figure pawn(1, 2, PAWN, BLACK);
-    Figure bishop(1, 1, BISHOP, BLACK);
+    Figure bishop(8, 2, BISHOP, BLACK);
     Figure whiteFigures[16] = { king };
     Figure blackFigures[16] = { bishop, rook };
 
     bool attacks = bishop.attacksKing(king.getX(), king.getY(), whiteFigures, blackFigures);
+
+    for (Figure figure : blackFigures) {
+        bool attacks = figure.attacksKing(king.getX(), king.getY(), whiteFigures, blackFigures);
+    }
 
     for (int line = 1; line <= 8; line++) {
         for (int column = 1; column <= 8; column++) {

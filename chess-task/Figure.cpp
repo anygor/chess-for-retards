@@ -106,15 +106,17 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 				break;
 			}
 			for (int j = column; j <= 8; j++) {
-				if (i == kingX && j == kingY) {
-					attacks = true;
-					break;
-				}
-				else if (i < 8){
-					i++;
-				}
-				else if (i == 8 || j == 8) {
-					break;
+				if (!this->isBlocked(i, j, kingX, kingY, whiteFigures, blackFigures)) {
+					if (i == kingX && j == kingY) {
+						attacks = true;
+						break;
+					}
+					else if (i < 8) {
+						i++;
+					}
+					else if (i == 8 || j == 8) {
+						break;
+					}
 				}
 			}
 		}
@@ -123,15 +125,17 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 				break;
 			}
 			for (int j = column; j >= 1; j--) {
-				if (i == kingX && j == kingY) {
-					attacks = true;
-					break;
-				}
-				else if (i < 8) {
-					i++;
-				}
-				else if (i == 8 || j == 1) {
-					break;
+				if (!this->isBlocked(i, j, kingX, kingY, whiteFigures, blackFigures)) {
+					if (i == kingX && j == kingY) {
+						attacks = true;
+						break;
+					}
+					else if (i < 8) {
+						i++;
+					}
+					else if (i == 8 || j == 1) {
+						break;
+					}
 				}
 			}
 		}
@@ -140,15 +144,17 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 				break;
 			}
 			for (int j = column; j >= 1; j--) {
-				if (i == kingX && j == kingY) {
-					attacks = true;
-					break;
-				}
-				else if (i > 1) {
-					i--;
-				}
-				else if (i == 1 || j == 1) {
-					break;
+				if (!this->isBlocked(i, j, kingX, kingY, whiteFigures, blackFigures)) {
+					if (i == kingX && j == kingY) {
+						attacks = true;
+						break;
+					}
+					else if (i > 1) {
+						i--;
+					}
+					else if (i == 1 || j == 1) {
+						break;
+					}
 				}
 			}
 		}
@@ -157,15 +163,17 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 				break;
 			}
 			for (int j = column; j <= 8; j++) {
-				if (i == kingX && j == kingY) {
-					attacks = true;
-					break;
-				}
-				else if (i > 1) {
-					i--;
-				}
-				else if (i == 1 || j == 8) {
-					break;
+				if (!this->isBlocked(i, j, kingX, kingY, whiteFigures, blackFigures)) {
+					if (i == kingX && j == kingY) {
+						attacks = true;
+						break;
+					}
+					else if (i > 1) {
+						i--;
+					}
+					else if (i == 1 || j == 8) {
+						break;
+					}
 				}
 			}
 		}
