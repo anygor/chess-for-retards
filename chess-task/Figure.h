@@ -20,12 +20,14 @@ public:
 	Figure();
 	Figure(int, int, FigureType, FigureColour);
 
-	bool attacksKing(int kingX, int kingY);
+	bool attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure blackFigures[]);
 	bool isBlocked(int x, int y, int kingX, int kingY, Figure whiteFigures[], Figure blackFigures[]);
 public:
 	int getX();
 	int getY();
 	FigureType getType();
 	FigureColour getColour();
+	friend bool operator==(const Figure& left, const Figure& right);
 };
 
+bool operator==(const Figure& left, const Figure& right);

@@ -26,21 +26,54 @@ FigureColour Figure::getColour() {
 	return colour;
 }
 
-bool Figure::attacksKing(int kingX, int kingY) {
+bool operator==(const Figure& left, const Figure& right)
+{
+	return (
+		left.x == right.x &&
+		left.y == right.y &&
+		left.type == right.type &&
+		left.colour == right.colour
+		);
+}
+
+bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure blackFigures[]) {
 	if (this->getType() == ROOK) {
 		int line = this->getX();
 		int column = this->getY();
 		bool attacks = false;
-		for (int column = 1; column < 8; column++) {
-			if (kingX == line && kingY == column) {
-				attacks = true;
+		for (int column = line; column <= 8; column++) {
+			if (!this->isBlocked(line, column, kingX, kingY, whiteFigures, blackFigures)) {
+				if (kingX == line && kingY == column) {
+					attacks = true;
+					break;
+				}
+			}
+			else {
 				break;
 			}
 		}
 		if (!attacks) {
-			for (int line = 0; line < 8; line++) {
-				if (kingX == line && kingY == column) {
-					attacks = true;
+			for (int column = line; column > 1; column--) {
+				if (!this->isBlocked(line, column, kingX, kingY, whiteFigures, blackFigures)) {
+					if (kingX == line && kingY == column) {
+						attacks = true;
+						break;
+					}
+				}
+				else {
+					break;
+				}
+			}
+		}
+		if (!attacks) {
+			for (int line = 0; line <= 8; line++) {
+				if (!this->isBlocked(line, column, kingX, kingY, whiteFigures, blackFigures)) {
+					if (kingX == line && kingY == column) {
+						attacks = true;
+						break;
+					}
+				}
+				else {
 					break;
 				}
 			}
@@ -117,4 +150,20 @@ bool Figure::attacksKing(int kingX, int kingY) {
 		}		
 		return attacks;
 	}
+}
+
+bool Figure::isBlocked(int x, int y, int kingX, int kingY, Figure whiteFigures[], Figure blackFigures[]) {
+	for (int i = 0; i <= 16; i++) {
+		if ((whiteFigures[i].getX() == x && whiteFigures[i].getY() == y) &&
+			(whiteFigures[i].getX() != kingX || whiteFigures[i].getY() != kingY) &&
+			(!(whiteFigures[i] == *this))) {
+			return true;
+		}
+		if ((blackFigures[i].getX() == x && blackFigures[i].getY() == y) &&
+			(blackFigures[i].getX() != kingX || blackFigures[i].getY() != kingY) &&
+			(!(blackFigures[i] == *this))) {
+			return true;
+		}
+	}
+	return false;
 }

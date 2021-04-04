@@ -3,13 +3,14 @@
 #include "Figure.h"
 
 int main() {
-    Figure king(5, 4, KING, WHITE);
-    //Figure rook(1, 2, ROOK, BLACK);
-    Figure bishop(2, 1, BISHOP, BLACK);
+    Figure king(1, 4, KING, WHITE);
+    Figure rook(2, 3, ROOK, BLACK);
+    Figure pawn(1, 2, PAWN, BLACK);
+    Figure bishop(4, 1, BISHOP, BLACK);
     Figure whiteFigures[16] = { king };
-    Figure blackFigures[16] = { bishop };
+    Figure blackFigures[16] = { bishop, rook };
 
-    bool attacks = bishop.attacksKing(king.getX(), king.getY());
+    bool attacks = bishop.attacksKing(king.getX(), king.getY(), whiteFigures, blackFigures);
 
     for (int line = 1; line <= 8; line++) {
         for (int column = 1; column <= 8; column++) {
