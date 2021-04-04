@@ -3,10 +3,10 @@
 #include "Figure.h"
 
 int main() {
-    Figure king(1, 4, KING, WHITE);
-    Figure rook(2, 3, ROOK, BLACK);
+    Figure king(5, 5, KING, WHITE);
+    Figure rook(4, 4, ROOK, BLACK);
     Figure pawn(1, 2, PAWN, BLACK);
-    Figure bishop(4, 1, BISHOP, BLACK);
+    Figure bishop(1, 1, BISHOP, BLACK);
     Figure whiteFigures[16] = { king };
     Figure blackFigures[16] = { bishop, rook };
 

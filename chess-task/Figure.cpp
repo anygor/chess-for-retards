@@ -41,7 +41,7 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 		int line = this->getX();
 		int column = this->getY();
 		bool attacks = false;
-		for (int column = line; column <= 8; column++) {
+		for (int column = this->getY(); column <= 8; column++) {
 			if (!this->isBlocked(line, column, kingX, kingY, whiteFigures, blackFigures)) {
 				if (kingX == line && kingY == column) {
 					attacks = true;
@@ -53,7 +53,7 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 			}
 		}
 		if (!attacks) {
-			for (int column = line; column > 1; column--) {
+			for (int column = this->getY(); column >= 1; column--) {
 				if (!this->isBlocked(line, column, kingX, kingY, whiteFigures, blackFigures)) {
 					if (kingX == line && kingY == column) {
 						attacks = true;
@@ -66,7 +66,20 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 			}
 		}
 		if (!attacks) {
-			for (int line = 0; line <= 8; line++) {
+			for (int line = this->getX(); line <= 8; line++) {
+				if (!this->isBlocked(line, column, kingX, kingY, whiteFigures, blackFigures)) {
+					if (kingX == line && kingY == column) {
+						attacks = true;
+						break;
+					}
+				}
+				else {
+					break;
+				}
+			}
+		}
+		if (!attacks) {
+			for (int line = this->getX(); line >= 1; line--) {
 				if (!this->isBlocked(line, column, kingX, kingY, whiteFigures, blackFigures)) {
 					if (kingX == line && kingY == column) {
 						attacks = true;
@@ -100,6 +113,9 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 				else if (i < 8){
 					i++;
 				}
+				else if (i == 8 || j == 8) {
+					break;
+				}
 			}
 		}
 		for (int i = line; i <= 8; i++) {
@@ -114,6 +130,9 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 				else if (i < 8) {
 					i++;
 				}
+				else if (i == 8 || j == 1) {
+					break;
+				}
 			}
 		}
 		for (int i = line; i >= 1; i--) {
@@ -128,6 +147,9 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 				else if (i > 1) {
 					i--;
 				}
+				else if (i == 1 || j == 1) {
+					break;
+				}
 			}
 		}
 		for (int i = line; i >= 1; i--) {
@@ -141,6 +163,9 @@ bool Figure::attacksKing(int kingX, int kingY, Figure whiteFigures[], Figure bla
 				}
 				else if (i > 1) {
 					i--;
+				}
+				else if (i == 1 || j == 8) {
+					break;
 				}
 			}
 		}
